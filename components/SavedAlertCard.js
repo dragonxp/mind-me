@@ -10,10 +10,10 @@ export default function SavedAlertCard({ alert }) {
                 <View style={styles.reorderIcon}>
                     <FontAwesome name="reorder" size={24} color="black" />
                 </View>
-                <>
+                <View>
                     <Text style={styles.title}>{alert.title}</Text>
                     {alert.body && <Text style={styles.body}>{alert.body}</Text>}
-                </>
+                </View>
             </View>
         </TouchableOpacity>
     )
@@ -21,10 +21,11 @@ export default function SavedAlertCard({ alert }) {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: '#e8def8',
+        borderColor: '#e8def8',
         paddingLeft: 18,
         paddingTop: 8,
         paddingBottom: 8,
+        borderWidth: 3,
         borderRadius: 5,
         marginBottom: 12,
         flexDirection: 'row',
@@ -39,6 +40,6 @@ const styles = StyleSheet.create({
     reorderIcon: {
         opacity: 0.55,
         justifyContent: 'center',
-        marginRight: 10,
+        marginRight: 12,
     }
 })

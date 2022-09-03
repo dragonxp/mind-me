@@ -1,71 +1,48 @@
 import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// alerts_active - for active alerts
-// alerts_saved - for quick saved alerts
-// alerts_history - for expired alerts
+// alert_active - for active alerts
+// alert_saved - for quick saved alerts
+// alert_history - for expired alerts
 
 
 export const fetchAlerts = async () => {
     try {
-        return await AsyncStorage.multiGet(['alerts_active', 'alerts_saved', 'alerts_history'])
+        return await AsyncStorage.multiGet(['alert_active', 'alert_saved', 'alert_history'])
     } catch (err) {
         console.log(err.message)
     }
 }
 
-
-// alerts active
-
-export const addActiveAlert = async (value) => {
+export const modifyAlertActive = async (value) => {
     value = JSON.stringify(value)
 
     try {
-        await AsyncStorage.setItem('alerts_active', value)
-    } catch (err) {
-        // save error
-        console.log(err.message)
-    }
-
-}
-
-export const modifyActiveAlert = (value) => {
-
-}
-
-export const deleteActiveAlert = (value) => {
-
-}
-
-
-// alerts history
-
-export const addAlertHistory = (value) => {
-
-}
-
-export const clearAlertHistory = () => {
-
-}
-
-
-// alerts saved
-
-export const addSavedAlert = async (value) => {
-    value = JSON.stringify(value)
-
-    try {
-        await AsyncStorage.setItem('alerts_saved', value)
+        await AsyncStorage.setItem('alert_active', value)
     } catch (err) {
         // save error
         console.log(err.message)
     }
 }
 
-export const modifySavedAlert = (value) => {
+export const modifyAlertSaved = async (value) => {
+    value = JSON.stringify(value)
 
+    try {
+        await AsyncStorage.setItem('alert_saved', value)
+    } catch (err) {
+        // save error
+        console.log(err.message)
+    }
 }
 
-export const deleteSavedAlert = (value) => {
+export const modifyAlertHistory = async (value) => {
+    value = JSON.stringify(value)
 
+    try {
+        await AsyncStorage.setItem('alert_history', value)
+    } catch (err) {
+        // save error
+        console.log(err.message)
+    }
 }

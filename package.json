@@ -19,6 +19,7 @@
     "intl": "^1.2.5",
     "react": "18.0.0",
     "react-native": "0.69.4",
+    "react-native-date-picker": "^4.2.5",
     "react-native-paper": "^5.0.0-rc.4",
     "react-native-paper-dates": "^0.8.7",
     "react-native-vector-icons": "^9.2.0"

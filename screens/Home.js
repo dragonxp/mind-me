@@ -4,15 +4,16 @@ import { useAlertContext } from '../hooks/useAlertContext';
 import SavedAlerts from '../components/SavedAlerts';
 import AlertForm from '../components/AlertForm';
 
+
 export default function Home() {
-	const { alertsActive, alertsSaved } = useAlertContext()
+	const { alertActive, alertSaved, dispatch } = useAlertContext()
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 			<ScrollView>
 				<View style={styles.container}>
-					<AlertForm alertsActive={alertsActive} alertsSaved={alertsSaved} />
-					<SavedAlerts alertsSaved={alertsSaved} />
+					<AlertForm alertActive={alertActive} alertSaved={alertSaved} dispatch={dispatch} />
+					<SavedAlerts alertSaved={alertSaved} />
 				</View>
 			</ScrollView>
 		</TouchableWithoutFeedback >

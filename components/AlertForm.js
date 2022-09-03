@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Keyboard } from 'react-native'
-import { TextInput, Button } from 'react-native-paper'
+import { StyleSheet, View, Text, Keyboard, TouchableOpacity } from 'react-native'
+import { TextInput, Button, IconButton } from 'react-native-paper'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { triggerNotification } from '../components/Notification';
-import { addActiveAlert, addSavedAlert } from '../components/AsyncStorage';
 
-export default function AlertForm({ alertsActive, alertsSaved }) {
+export default function AlertForm({ alertActive, alertSaved, dispatch }) {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
 
@@ -36,7 +35,8 @@ export default function AlertForm({ alertsActive, alertsSaved }) {
         const content = getAlertFormat()
 
         triggerNotification(content, date)
-        addActiveAlert([{ date, ...content }, ...alertsActive])
+        dispatch({ type: 'MODIFY_ALERT_ACTIVE', payload: [{ date, ...content }, ...alertActive] })
+
     }
 
     const saveAlert = () => {
@@ -44,7 +44,7 @@ export default function AlertForm({ alertsActive, alertsSaved }) {
 
         const content = getAlertFormat()
 
-        addSavedAlert([{ ...content, key: Date.now() }, ...alertsSaved])
+        dispatch({ type: 'MODIFY_ALERT_SAVED', payload: [{ ...content, key: Date.now() }, ...alertSaved] })
     }
 
     const onChange = (event, selectedDate) => {
@@ -74,7 +74,7 @@ export default function AlertForm({ alertsActive, alertsSaved }) {
         <View style={styles.container}>
             <TextInput
                 style={styles.textInput}
-                label="Reminder Title"
+                label="Remind me to (optional)"
                 mode='outlined'
                 placeholder='Give cat some treats'
                 value={title}
@@ -89,6 +89,26 @@ export default function AlertForm({ alertsActive, alertsSaved }) {
                 value={description}
                 onChangeText={text => setDescription(text)}
             />
+
+            <View style={styles.clock}>
+                <TextInput
+                    style={styles.textInput}
+                    left={<TextInput.Icon name="clock-outline" />}
+                    label="Time"
+                    mode='outlined'
+                    value={reminderTime}
+                    onPressIn={showTimepicker}
+                    showSoftInputOnFocus={false}
+                />
+
+                <IconButton
+                    icon="swap-horizontal"
+                    size={34}
+                    style={styles.clockIcon}
+                    onPress={() => console.log('Pressed')}
+                />
+            </View>
+
             <TextInput
                 style={styles.textInput}
                 left={<TextInput.Icon name="calendar-range" />}
@@ -97,15 +117,7 @@ export default function AlertForm({ alertsActive, alertsSaved }) {
                 value={reminderDate}
                 onPressIn={showDatepicker}
                 showSoftInputOnFocus={false}
-            />
-            <TextInput
-                style={styles.textInput}
-                left={<TextInput.Icon name="clock-outline" />}
-                label="Time"
-                mode='outlined'
-                value={reminderTime}
-                onPressIn={showTimepicker}
-                showSoftInputOnFocus={false}
+                onPress={() =>console.log('check')}
             />
 
             <Button
@@ -157,5 +169,15 @@ const styles = StyleSheet.create({
     },
     textInput: {
         marginBottom: 10,
+        flexGrow: 1,
+    },
+    clock: {
+        flexDirection: 'row',
+    },
+    clockIcon: {
+        alignSelf: 'auto',
+        backgroundColor: '#e8def8',
+        borderRadius: 5,
+        marginLeft: 12,
     },
 })

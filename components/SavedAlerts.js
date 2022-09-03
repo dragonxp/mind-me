@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet, FlatList, ScrollViewComponent, ScrollView } from "react-native";
 import SavedAlertCard from "./SavedAlertCard";
 
-export default function SavedAlerts({ alertsSaved }) {
+export default function SavedAlerts({ alertSaved }) {
 
-    if (alertsSaved.length === 0) {
+    if (alertSaved.length === 0) {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Saved Alerts</Text>
@@ -16,7 +16,7 @@ export default function SavedAlerts({ alertsSaved }) {
             <View style={styles.container}>
                 <Text style={styles.title}>Saved Alerts</Text>
                 <ScrollView>
-                    {alertsSaved.map((alert) => (
+                    {alertSaved.map((alert) => (
                         <SavedAlertCard key={alert.key} alert={alert} />
                     ))}
                 </ScrollView>

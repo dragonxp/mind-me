@@ -1,0 +1,22 @@
+Once
+    Date and Time
+Every
+    Minutes
+    Hour
+    Days
+    Week
+    Month
+    Year
+Selected Time
+    In a Day
+        Time
+    In a Week
+        Mo Tu We Th Fr Sa Su
+    In a Calender
+        Selectable Calender
+Random
+    Times an Hour
+    Times a Day
+    Times a Week
+    Times a Month
+    Times a Year
